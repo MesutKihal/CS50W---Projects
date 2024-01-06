@@ -1,0 +1,39 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+	{% for message in messages %}
+		{% if message.tags  == "error" %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% elif message.tags == "success" %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endif %}
+	{% endfor %}
+	<form method="post" action="{% url 'encyclopedia:new' %}">
+		{% csrf_token %}
+		<div class="row mt-4 mb-4 ml-4 mr-4">
+			<div class="col-2 mx-auto">
+				<label class="text-primary h3">Title</label>
+			</div>
+			{{ form.title }}
+		</div>
+		<div class="row mt-4 mb-4 ml-4 mr-4">
+			<div class="col-2 mx-auto">
+				<label class="text-primary h3">Markdown</label>
+			</div>
+			{{ form.markdown}}
+		</div>
+		<div class="row mt-4 mb-4 ml-4 mr-4">
+			<button class="btn btn-primary col-2 mx-auto mt-4" type="submit">Save</button>
+		</div>
+	</form>
+{% endblock %}
+
+<!--<textarea class="form-control" rows="10" value="" placeholder="Enter the content of the entry"></textarea>-->

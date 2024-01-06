@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+	{% if content %}
+		<div class="text-dark">
+			{{ content | safe }}
+		</div>
+	{% else %}
+		<h1 style="color: red;">404</h1>
+		<p>Entry does not exist</p>
+	{% endif %}
+	<div class="container-fluid">
+		<div class="col-4 mx-auto">
+			<a href="{% url 'encyclopedia:edit' title %}" class="btn btn-outline-primary">Edit</a>
+		</div>
+	</div>
+{% endblock %}
