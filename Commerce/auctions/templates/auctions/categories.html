@@ -1,0 +1,31 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Categories</h2>
+	<div class="row justify-content-around">
+		<form class="col-2" method="get">
+			{% for category in categories %}
+			<button type="submit" class="btn btn-link container-fluid" value="{{ category.id }}" name="category">{{ category.name }}</button>
+			{% endfor %}
+		</form>
+		<div class="col-10">
+			{% for listing in listings %}
+				{% for bid in bids %}
+					{% if bid.listing == listing %}
+						<div style="height: 250px;" class="card mt-2 mr-2 ml-2 mb-2">
+							<div class="row justify-content-around">
+								<img class="col-4" width="100" height="250" src="{{ listing.image.url }}">
+								<div class="col-6">
+									<a href="{% url 'listing' listing.id %}" class="text-dark h5">{{ listing.title }}</a>
+									<p class="text-dark h6">${{ bid.value }}</p>
+									<p class="text-secondary">{{ listing.description }}</p>
+									<small class="text-secondary">{{ listing.created_at }}</small>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

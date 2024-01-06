@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}lustremail{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
+        {% block script %}
+        {% endblock %}
+    </head>
+	<style>
+		{% load static %}
+		body {
+			background-image: url("{% static 'mail/background.gif' %}");
+			background-size: 130%;
+			font-family: verdana;
+		}
+	</style>
+    <body>
+        <div class="container">
+			{% for message in messages %}
+				{% if message.tags  == "error" %}
+					<div class="alert alert-danger">
+						{{ message }}
+					</div>
+				{% elif message.tags == "success" %}
+					<div class="alert alert-success">
+						{{ message }}
+					</div>
+				{% elif message.tags == "info" %}
+					<div class="alert alert-info">
+						{{ message }}
+					</div>
+				{% endif %}
+			{% endfor %}
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

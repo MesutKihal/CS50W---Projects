@@ -1,0 +1,24 @@
+{% extends 'hoopoe/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+	<form class="box is-mobile" method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		<div class="columns is-centered mt-2">
+			<h1 class="is-size-2 has-text-info is-half">login</h1>
+		</div>
+		<div class="columns is-centered mt-2">
+			<input name="username" placeholder="Username" class="input column is-half mt-2"/>
+		</div>
+		<div class="columns is-centered mt-2">
+			<input name="password" placeholder="Password" class="input column is-half mt-2" type="password"/>
+		</div>
+		<div class="columns is-centered mt-2 mt-2">
+			<button id="submit-btn" class="button is-info column is-2"><strong>Login</strong></button>
+		</div>
+		<div class="columns is-centered mt-2 mt-2">
+			<a href="{% url 'register' %}">I Don't have an account?</a>
+		</div>
+	</form>
+{% endblock %}

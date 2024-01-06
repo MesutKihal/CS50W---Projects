@@ -1,0 +1,27 @@
+{% extends 'hoopoe/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+	<form class="box is-mobile" method="post" action="{% url 'register' %}">
+		{% csrf_token %}
+		<div class="columns is-centered mt-2">
+			<h1 class="is-size-2 has-text-info is-half">Register</h1>
+		</div>
+		<div class="columns is-centered mt-2">
+			<input name="username" placeholder="Username" class="input column is-half mt-2"/>
+		</div>
+		<div class="columns is-centered mt-2">
+			<input name="email" placeholder="Email" class="input column is-half mt-2"/>
+		</div>
+		<div class="columns is-centered mt-2">
+			<input name="password" placeholder="Password" class="input column is-half mt-2" type="password"/>
+		</div>
+		<div class="columns is-centered mt-2">
+			<input name="confirm" placeholder="Confirm Password" class="input column is-half mt-2" type="password"/>
+		</div>
+		<div class="columns is-centered mt-2">
+			<button id="submit-btn" class="button is-info column is-one-fifth"><strong>Register</strong></button>
+		</div>
+	</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+	{% for auction in closed_auctions %}
+		{% if auction.winner == request.user %}
+			<div class="card mt-2 mr-2 ml-2 mb-2">
+				<a href="{% url 'listing' auction.item.id %}" class="text-danger bg-light">You have won bidding for '{{ auction.item.title }}' owned by '{{ auction.owner.username }}'</a>
+			</div>
+		{% endif %}
+	{% endfor %}
+	{% for listing in listings %}
+		{% for bid in bids %}
+			{% if bid.listing == listing %}
+				<div style="height: 250px;" class="card mt-2 mr-2 ml-2 mb-2">
+					<div class="row justify-content-around">
+						<img class="col-2" width="100" src="{{ listing.image.url }}">
+						<div class="col-8">
+							{% if user.is_authenticated %}
+								<a href="{% url 'listing' listing.id %}" class="text-dark h5">{{ listing.title }}</a>
+							{% else %}
+								<p class="text-dark h5">{{ listing.title }}</p>
+							{% endif %}
+							<p class="text-dark h6">${{ bid.value }}</p>
+							<p class="text-secondary">{{ listing.description }}</p>
+							<small class="text-secondary">{{ listing.created_at }}</small>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+{% endblock %}

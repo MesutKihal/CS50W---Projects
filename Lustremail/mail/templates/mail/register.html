@@ -1,0 +1,41 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+	<div class="card bg-dark">
+		<div class="row justify-content-center">
+			<h2 class="card-title text-light">Register</h2>
+		</div>
+		<form class="card-body" action="{% url 'register' %}" method="post">
+			{% csrf_token %}
+			<span id="validator1"></span>
+			<div class="input-group mb-3">
+				<input id="email" class="form-control bg-dark text-light" type="text" name="email" placeholder="Email Address">
+				<div class="form-group-append">
+					<span class="input-group-text bg-secondary text-light">@lustremail.com</span>
+				</div>
+			</div>
+			<span id="validator2"></span>
+			<div class="input-group">
+				<input id="pass" class="form-control bg-dark text-light" type="password" name="password" placeholder="Password">
+				<div id="pass-toggle" class="form-group-append bg-dark mt-1 ml-1 mb-1 mr-1">
+					<span><img id="toggle-img" height="32" width="32" src="{% static 'mail/moon.png' %}"/></span>
+				</div>
+			</div>
+			<span id="validator3" class="mt-1"></span>
+			<div class="form-group mt-1">
+				<input id="confirm" class="form-control bg-dark text-light" type="password" name="confirmation" placeholder="Confirm Password">
+			</div>
+			<div class="row justify-content-center">
+				<input class="btn btn-success col-2" type="submit" value="Register">
+			</div>
+		</form>
+		<div class="row justify-content-center">
+			<a class="text-warning" href="{% url 'login' %}">Already have an account?</a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/register.js' %}"></script>
+{% endblock %}

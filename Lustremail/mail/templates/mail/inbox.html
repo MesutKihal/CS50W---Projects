@@ -1,0 +1,42 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+	<div class="card bg-transparent" style="font-family: rockwell;">
+		<div class="card-title">
+			<h2 class="text-light bg-dark">{{ request.user.email }}</h2>
+		<div class="row justify-content-center mx-auto">
+			<button class="btn btn-sm btn-primary col-2" id="inbox">Inbox</button>
+			<button class="btn btn-sm btn-dark col-2" id="compose">Compose</button>
+			<button class="btn btn-sm btn-warning col-2" id="sent">Sent</button>
+			<button class="btn btn-sm btn-success col-2" id="archived">Archived</button>
+			<a class="btn btn-sm btn-danger col-2" href="{% url 'logout' %}">Log Out</a>
+			<hr>
+		</div>
+		<div id="emails-view" class="card-body">
+		</div>
+
+		<div id="compose-view" class="card-body bg-dark">
+			<h3 class="text-light">New Email</h3>
+			<form id="compose-form">
+				<div class="form-group text-light">
+					From: <input disabled class="form-control bg-dark text-light" value="{{ request.user.email }}">
+				</div>
+				<div class="form-group text-light">
+					To: <input id="compose-recipients" class="form-control bg-dark text-light">
+				</div>
+				<div class="form-group">
+					<input class="form-control bg-dark text-light" id="compose-subject" placeholder="Subject">
+				</div>
+				<textarea class="form-control bg-dark text-light" id="compose-body" placeholder="Body"></textarea>
+				<div class="row justify-content-center">
+					<input type="submit" class="btn btn-success col-2 mt-4"/>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

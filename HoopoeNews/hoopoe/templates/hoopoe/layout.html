@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		{% load static %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+		<script src="https://kit.fontawesome.com/d75b1ad41e.js" crossorigin="anonymous"></script>
+		<style>
+			.nav-category:hover {
+				background-color: #EEE;
+			}
+		</style>
+		<title>Hoopoe News</title>
+		<div class="columns has-background-info is-mobile is-centered">
+			<div class="columns column is-three-fifths mt-4">
+				<img width="64" height="64" src="{% static 'img/hoopoe.png' %}" class="image is-one-quarter"/>
+				<a href="{% url 'index' %}" onclick="window.localStorage.setItem('page_name', 'top')" class="is-three-quarters is-size-3 has-text-white">Hoopoe News</a>
+			</div>
+			<div class="columns column is-one-fifth mt-4 is-mobile">
+				{% if user.is_authenticated %}
+					<div class="control">
+						<div class="mb-2">
+							<button id="profile_btn" data-id="{{ user.id }}" class="button is-half has-background-info has-text-white mb-2">Profile<span class="icon is-small is-left ml-2"><i class="fa-solid fa-user"></i></span></button>
+							<button onclick="window.location = {% url 'logout' %}" class="button is-half has-background-info has-text-white">Logout<span class="icon is-small has-text-white is-left ml-2"><i class="fa fa-sign-out" aria-hidden="true"></i></span></a>
+						</div>
+					</div>
+				{% else %}
+					<div class="control mb-2">
+						<div class="block">
+							<button onclick="window.location = {% url 'login' %}" class="button is-one-third has-background-info has-text-white mb-2">Login<span class="icon is-small is-left ml-2"><i class="fa fa-sign-in" aria-hidden="true"></i></span></button>
+							<button onclick="window.location = {% url 'register' %}" class="button is-one-third has-background-info has-text-white">Register<span class="icon is-small has-text-white is-left ml-2"><i class="fa fa-book" aria-hidden="true"></i></span></a>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</head>
+	<body>
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.tags == "error" %}
+					<div class="message is-danger"><p class="message-body">{{ message }}</p></div>
+				{% else %}
+					<div class="message is-success"><p class="message-body">{{ message }}</p></div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% block content %}
+		{% endblock %}
+		{% block script %}
+		{% endblock %}
+	</body>
+</html>

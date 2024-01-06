@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create Listing</h2>
+	<form method="post" action="{% url 'create' %}" enctype='multipart/form-data'>
+		{% csrf_token %}
+		<div class="row mt-2 ml-2 mr-2">
+			<p class="text-dark h6">Title</p>
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<input class="form-control" name="title"  placeholder="Enter the title of the listing">
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<p class="text-dark h6">description</p>
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<textarea class="form-control" name="desc" rows="5"  placeholder="Describe the listing in a few lines"></textarea>
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<p class="text-dark h6">Starting Bid</p>
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<input class="form-control" name="st-bid"  placeholder="0.00">
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<div class="col-6 card">
+				<p class="text-dark h6 mx-auto">Category</p>
+				<select name="cate" class="btn btn-light dropdown-toggle">
+					<option></option>
+				{% for catagory in categories %}
+					<option>{{ catagory.name }}</option>
+				{% endfor %}
+				</select>
+				<br>
+			</div>
+			<div class="col-6 card">
+				<p class="text-dark h6 mx-auto">Image</p>
+				<input name="img" type="file">
+			</div>
+		</div>
+		<div class="row mt-2 ml-2 mr-2">
+			<button class="btn btn-success mx-auto col-2" type="submit">Save</button>
+		</div>
+	</form>
+{% endblock %}

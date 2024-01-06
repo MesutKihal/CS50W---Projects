@@ -1,0 +1,41 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+	{% if user.is_authenticated %}
+		<div id="control-new" class="container-fluid mb-2 bg-dark">
+			<div class="row align-items-center">
+				<button id="creator" class="btn btn-primary mx-auto col-2 mb-2 mt-2">New Post</button>
+			</div>
+		</div>
+		<div id="new" class="container-fluid bg-dark mb-2" style="display: none;">
+			<div class="row justify-content-end">
+				<button class="btn btn-danger col-1" onclick="window.location.reload()">X</button>
+			</div>
+			<form>	
+				<div class="row mb-2">
+					<h4 class="col-3 text-light mx-auto">New Post</h4>
+				</div>
+				<div class="row mb-2">
+					<textarea id="content" rows="5" class="col-10 mx-auto bg-dark text-light"></textarea>
+				</div>
+				<div class="row mb-2">
+					<button class="btn btn-light mx-auto col-2 mb-2 mt-2" type="submit">Create</button>
+				</div>
+			</form>
+		</div>
+	{% endif %}
+	<div id="posts" style="display: block;">
+	</div>
+	<div id="following" style="display: none;">
+	</div>
+	<div id="user_details" style="display: none;" class="container bg-dark">
+	</div>
+	<div id="profile-div" style="display: none;">
+	</div>
+	<div id="pagination" class="row justify-content-center">
+		<button id="prev" class="btn btn-light col-1" style="display: none;">PREV</button>
+		<button id="paginator" class="btn btn-light col-1 ml-1 mr-1">1</button>
+		<button id="next" class="btn btn-light col-1" style="display: none;">NEXT</button>
+	</div>
+{% endblock %}

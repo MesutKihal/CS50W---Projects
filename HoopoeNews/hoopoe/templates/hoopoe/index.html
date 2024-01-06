@@ -1,0 +1,51 @@
+{% extends 'hoopoe/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+	<a id="navburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+	  <span aria-hidden="true"></span>
+	  <span aria-hidden="true"></span>
+	  <span aria-hidden="true"></span>
+	</a>
+	<div id="category-navbar" class="columns navbar is-mobile is-centered has-background-white-bis">
+		<div id="search-bar" class="navbar-item">
+			<div class="field">
+				<div class="control has-icons-left">
+					<span class="icon is-small is-left mt-3 ml-5">
+					  <i class="fa-solid fa-magnifying-glass"></i>
+					</span>
+					<input id="search-input" class="input is-rounded is-link has-text-dark is-bold mt-3 ml-5 is-4"/>
+				</div>
+			</div>
+		</div>
+		{% for category in items %}
+			<div class="navbar-item ml-5 nav-category">
+				<a class="is-size-4 has-text-dark is-bold" onclick="getCategory('{{ category.name }}')">{{ category.name }}</a>
+			</div>
+		{% endfor %}
+		<div class="navbar-item ml-5 mt-4 select is-rounded is-link">
+			<select name="selector" id="nav-select" class="is-size-6">
+				<option value="top">More..</option>
+				{% for category in dropdowns %}
+					<option value="{{ category.name }}">{{ category.name }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+	<div id="news_div" style="flex-wrap: wrap;" class="columns is-mobile is-centered mt-5">
+	</div>
+	<div id="article_page" class="rows is-mobile is-centered">
+	</div>
+	<div id="profile_page" class="rows is-mobile is-centered">
+	</div>
+	{% if user.is_authenticated %}
+		<div id="paginator" class="columns is-mobile is-centered" onclick="getMore()">
+			<button class="button column is-one-quarter is-rounded has-background-info-dark has-text-white">More</button>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
